@@ -6,5 +6,6 @@ module.exports = {
     SIGNUP: "/signup",
     LOGIN: "/login",
     LOGOUT: "/logout",
+    CURRENT : "/currentuser",
     ID: "/:id"
 }

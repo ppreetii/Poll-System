@@ -24,4 +24,8 @@ router.post(
   userController.logout
 );
 
+router.get(
+  `${API.CURRENT}`,
+  
+)
 module.exports = router;

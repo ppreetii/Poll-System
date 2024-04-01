@@ -33,3 +33,9 @@ exports.logout = async (req, res, next) => {
     next(error);
   }
 };
+
+exports.currentUser = async (req, res, next) => {
+  res.send({
+    currentUser: req.currentUser ?? null,
+  });
+};
