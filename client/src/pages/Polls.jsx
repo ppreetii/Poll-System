@@ -21,7 +21,8 @@ async function loadPolls() {
   const response = await fetch(
     "https://poll-system-be.vercel.app/api/v1/polls",
     {
-      withCredentials: true
+      withCredentials: true,
+      credentials: "include",
     }
   );
   const resData = await response.json();
