@@ -1,6 +1,7 @@
 import { json, redirect } from "react-router-dom";
 
 import AuthForm from "../components/auth/AuthForm";
+import { COMMON } from "../constants/common";
 
 function AuthenticationPage() {
   return <AuthForm />;
@@ -28,7 +29,7 @@ export async function action({ request }) {
     password: data.get("password"),
   };
 
-  if(mode === 'signup'){
+  if (mode === "signup") {
     authData.name = data.get("name");
   }
 
@@ -37,30 +38,29 @@ export async function action({ request }) {
     headers: {
       "Content-Type": "application/json",
     },
+    credentials: "include",
     body: JSON.stringify(authData),
   });
 
-  const resData = await response.json();
-
+  if (COMMON.ERR_STATUS.includes(response.status)) {
+    return response;
+  }
   if (!response.ok) {
-    throw json(
-      resData,
-      {
-        status: response.status
-      }
-    );
+    throw json(response, {
+      status: response.status,
+    });
   }
 
-  if(mode === 'signup'){
-    return redirect('/auth?mode=login');
+  if (mode === "signup") {
+    return redirect("/auth?mode=login");
   }
-
+  const resData = await response.json();
   const token = resData.jwt;
 
-  localStorage.setItem('token', token);
+  localStorage.setItem("token", token);
   const expiration = new Date();
   expiration.setHours(expiration.getHours() + 1);
-  localStorage.setItem('expiration', expiration.toISOString());
+  localStorage.setItem("expiration", expiration.toISOString());
 
-  return redirect('/');
+  return redirect("/");
 }

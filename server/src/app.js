@@ -13,7 +13,12 @@ const PageNotFound = require("./errors/page-not-found-error");
 
 const app = express();
 
-app.use(cors());
+app.use(
+  cors({
+    origin: ["http://localhost:5173"],
+    credentials: true,
+  })
+);
 app.use(helmet());
 app.use(bodyParser.json());
 
@@ -28,11 +33,11 @@ app.use(`${API.BASE_URL}${API.USER}`, userRoutes);
 app.use(`${API.BASE_URL}${API.POLL}`, pollRoutes);
 app.use(`${API.BASE_URL}${API.CHAT}`, chatRoutes);
 
-app.get('/', (req,res,next) =>{
+app.get("/", (req, res, next) => {
   res.json({
-    message: "Welcome to our Poll System App"
+    message: "Welcome to our Poll System App",
   });
-})
+});
 
 app.all("*", () => {
   throw new PageNotFound();

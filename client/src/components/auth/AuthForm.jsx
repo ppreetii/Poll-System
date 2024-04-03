@@ -8,9 +8,9 @@ import {
 
 import classes from "./AuthForm.module.css";
 
-function AuthForm() {
-  
+import PageContent from "../common/PageContent";
 
+function AuthForm() {
   const data = useActionData();
   const navigation = useNavigation();
   const [searchParams] = useSearchParams();
@@ -22,14 +22,6 @@ function AuthForm() {
     <>
       <Form method="post" className={classes.form}>
         <h1>{isLogin ? "Log In" : "Register"}</h1>
-        {data?.errors && (
-          <ul>
-            {Object.values(data.errors).map((err) => (
-              <li key={err}>{err}</li>
-            ))}
-          </ul>
-        )}
-        {data?.message && <p>{data.message}</p>}
         {!isLogin && (
           <p>
             <label htmlFor="name">Name</label>
@@ -53,6 +45,15 @@ function AuthForm() {
           </button>
         </div>
       </Form>
+      {data?.errors && (
+        <PageContent
+          title={
+            data.errors[0].field ? data.errors[0].message : "An error occurred"
+          }
+        >
+          {data.errors[0].field ?? data.errors[0].message}
+        </PageContent>
+      )}
     </>
   );
 }
