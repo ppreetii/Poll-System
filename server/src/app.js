@@ -13,6 +13,7 @@ const PageNotFound = require("./errors/page-not-found-error");
 
 const app = express();
 
+app.set("trust proxy", 1);
 app.use(
   cors({
     origin: ["http://localhost:5173"],
@@ -25,7 +26,8 @@ app.use(bodyParser.json());
 app.use(
   cookieSession({
     signed: false,
-    secure: false
+    secure: true,
+    sameSite: "none",
   })
 );
 

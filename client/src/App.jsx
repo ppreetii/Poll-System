@@ -10,6 +10,7 @@ import AuthenticationPage, {
 } from "./pages/Authentication";
 import PollsPage,{loader as pollLoader} from "./pages/Polls";
 import { action as logoutAction } from "./pages/Logout";
+import PollDetailPage , {loader as pollDetailLoader, action as votingAction} from "./pages/PollDetail";
 
 import { tokenLoader } from "./utils/auth";
 
@@ -30,6 +31,19 @@ const router = createBrowserRouter([
             index: true,
             element: <PollsPage/>,
             loader: pollLoader
+          },
+          {
+            path: ":pollId",
+            id: "poll-detail",
+            loader: pollDetailLoader,
+            children: [
+              { 
+                index: true,
+                element: <PollDetailPage />,
+                action: votingAction,
+                
+              }
+            ],
           }
         ]
       },

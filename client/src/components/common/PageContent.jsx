@@ -1,8 +1,16 @@
+import { useState } from 'react';
 import classes from './PageContent.module.css';
 
-function PageContent({ title, children }) {
+function PageContent({ title, children , timeout = 0}) {
+  const [visible, setVisisble] = useState(true);
+
+  if(timeout){
+    setTimeout(()=>{
+      setVisisble(false);
+    }, timeout)
+  }
   return (
-    <div className={classes.content}>
+    visible && <div className={classes.content}>
       <h1>{title}</h1>
       {children}
     </div>
