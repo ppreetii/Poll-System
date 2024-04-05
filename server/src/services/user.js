@@ -44,12 +44,13 @@ exports.login = async (data) => {
 
     const jwt = generateToken({
       id: user._id,
-      email: user.email,
+      email: user.email
     });
 
     return {
       jwt,
       email: user.email,
+      name: user.name
     };
   } catch (error) {
     throw error;

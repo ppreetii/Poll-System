@@ -17,9 +17,9 @@ function PollItem({ data }) {
 
   return (
     <Form  method="PATCH" className={classes.poll}>
-      {data?.errors && (
+      {/* {data?.errors && (
         <PageContent title={data.errors[0].field ?? data.errors[0].message} timeout={3000} />
-      )}
+      )} */}
       {voteActionData?.errors && (
         <PageContent
           title={
@@ -32,19 +32,19 @@ function PollItem({ data }) {
       <h1>{data.question}</h1>
       <p>
         <input type="checkbox" id="optionA" name="optionA" value="false" />
-        <label htmlFor="optionA"> {data.optionA}</label>
+        <label htmlFor="optionA"> A. {data.optionA}</label>
       </p>
       <p>
         <input type="checkbox" id="optionB" name="optionB" value="false" />
-        <label htmlFor="optionB"> {data.optionB}</label>
+        <label htmlFor="optionB">B. {data.optionB}</label>
       </p>
       <p>
         <input type="checkbox" id="optionC" name="optionC" value="false" />
-        <label htmlFor="optionC"> {data.optionC}</label>
+        <label htmlFor="optionC">C. {data.optionC}</label>
       </p>
       <p>
         <input type="checkbox" id="optionD" name="optionD" value="false" />
-        <label htmlFor="optionD"> {data.optionD}</label>
+        <label htmlFor="optionD">D. {data.optionD}</label>
       </p>
 
       {token && (

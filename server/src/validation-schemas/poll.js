@@ -20,7 +20,8 @@ const updatePollSchema = joi.object().keys({
   optionB: joi.boolean(),
   optionC: joi.boolean(),
   optionD: joi.boolean()
-}).oxor('optionA', 'optionB', 'optionC','optionD');
+})
+// .oxor('optionA', 'optionB', 'optionC','optionD');
 
 module.exports = {
   createPollSchema,

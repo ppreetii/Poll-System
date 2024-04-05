@@ -2,6 +2,8 @@ import { json, redirect } from "react-router-dom";
 
 import AuthForm from "../components/auth/AuthForm";
 import { COMMON } from "../constants/common";
+import { API } from "../constants/api";
+import { socket } from "../socket";
 
 function AuthenticationPage() {
   return <AuthForm />;
@@ -33,14 +35,17 @@ export async function action({ request }) {
     authData.name = data.get("name");
   }
 
-  const response = await fetch(`https://poll-system-be.vercel.app/api/v1/users/${mode}`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    credentials: "include",
-    body: JSON.stringify(authData),
-  });
+  const response = await fetch(
+    `${API.BASE_LOCAL}${API.USERS}/${mode}`, //donot forget to change
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
+      body: JSON.stringify(authData),
+    }
+  );
 
   if (COMMON.ERR_STATUS.includes(response.status)) {
     return response;
@@ -56,11 +61,13 @@ export async function action({ request }) {
   }
   const resData = await response.json();
   const token = resData.jwt;
-
+  const username = resData.name;
   localStorage.setItem("token", token);
+  localStorage.setItem("username", username);
   const expiration = new Date();
   expiration.setHours(expiration.getHours() + 1);
   localStorage.setItem("expiration", expiration.toISOString());
 
+  socket.connect();
   return redirect("/");
 }

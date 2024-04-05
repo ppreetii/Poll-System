@@ -55,19 +55,15 @@ exports.updatePoll = async (id, data) => {
     }
 
     if (data?.optionA) {
-      poll.optionA = data.optionA;
       poll.countA += 1;
     }
     if (data?.optionB) {
-      poll.optionB = data.optionB;
       poll.countB += 1;
     }
     if (data?.optionC) {
-      poll.optionC = data.optionC;
       poll.countC += 1;
     }
     if (data?.optionD) {
-      poll.optionD = data.optionD;
       poll.countD += 1;
     }
 
