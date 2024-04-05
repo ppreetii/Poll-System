@@ -11,6 +11,7 @@ import AuthenticationPage, {
 import PollsPage,{loader as pollLoader} from "./pages/Polls";
 import { action as logoutAction } from "./pages/Logout";
 import PollDetailPage , {loader as pollDetailLoader, action as votingAction} from "./pages/PollDetail";
+import NewPollPage, {action as newPollAction} from "./pages/NewPoll";
 
 import { tokenLoader } from "./utils/auth";
 
@@ -40,10 +41,14 @@ const router = createBrowserRouter([
               { 
                 index: true,
                 element: <PollDetailPage />,
-                action: votingAction,
-                
+                action: votingAction,               
               }
             ],
+          },
+          {
+            path: "new",
+            element: <NewPollPage />,
+            action: newPollAction
           }
         ]
       },

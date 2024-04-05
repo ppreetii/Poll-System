@@ -1,0 +1,25 @@
+.poll {
+    max-width: 40rem;
+    margin: 2rem auto;
+    text-align: center;
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  p{
+    display: inline;
+  }
+  
+  p input{
+    color: var(--color-primary-800);
+  }
+  
+  .actions {
+    background-color: transparent;
+    border: none;
+    color: var(--color-primary-800);
+  }
+  

@@ -12,7 +12,7 @@ function PollsNavigation() {
           {token && (
             <li>
               <NavLink
-                to="/events/new"
+                to="/polls/new"
                 className={({ isActive }) =>
                   isActive ? classes.active : undefined
                 }
